@@ -7,28 +7,34 @@ class PageDetailProduct extends StatefulWidget {
   final double rating;
   final List color;
 
+  late int quality = 0;
+  List<Color> warnaBulatan = [
+    Colors.green,
+    Colors.blue,
+    Colors.yellow,
+    Colors.orange
+  ];
+
+  bool onTapColor = false;
+
   // const PageDetailProduct(this.name,
   //     {super.key});
-  const PageDetailProduct(this.name, this.image, this.price, this.rating, this.color,
+  PageDetailProduct(this.name, this.image, this.price, this.rating, this.color,
       {super.key});
 
   @override
-  State<PageDetailProduct> createState() =>
-      _PageDetailProductState();
+  State<PageDetailProduct> createState() => _PageDetailProductState();
 }
 
 class _PageDetailProductState extends State<PageDetailProduct> {
   _PageDetailProductState();
 
-
-  final dynamic _setColorBorder = Colors.white;
+  late dynamic _setColorBorder = Colors.white;
 
   // int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-
-    final Size size = MediaQuery.of(context).size;
-    final sizeHeighMD = size.height < 800;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Stack(
@@ -89,7 +95,7 @@ class _PageDetailProductState extends State<PageDetailProduct> {
                   child: null,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     print('ini adalah tombol favorite');
                   },
                   child: SizedBox(
@@ -139,7 +145,8 @@ class _PageDetailProductState extends State<PageDetailProduct> {
             top: 520,
             child: Container(
               height: 400,
-              width:  sizeHeighMD ? 411 : 393,
+              // width: sizeHeighMD ? 411 : 393,
+              width: 410,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 30,
@@ -157,7 +164,7 @@ class _PageDetailProductState extends State<PageDetailProduct> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width : sizeHeighMD ? 280 : null,
+                        width: 280,
                         child: Text(
                           widget.name,
                           style: const TextStyle(
@@ -177,71 +184,220 @@ class _PageDetailProductState extends State<PageDetailProduct> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 1),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
                           Icons.star,
-                          color: widget.rating < 1.0 ? Colors.black12 : Colors.amber,
+                          color: widget.rating < 1.0
+                              ? Colors.black12
+                              : Colors.amber,
                           size: 20,
                         ),
                         Icon(
                           Icons.star,
-                          color: widget.rating < 2.0 ? Colors.black12 : Colors.amber,
+                          color: widget.rating < 2.0
+                              ? Colors.black12
+                              : Colors.amber,
                           size: 20,
                         ),
                         Icon(
                           Icons.star,
-                          color: widget.rating < 3.0 ? Colors.black12 : Colors.amber,
+                          color: widget.rating < 3.0
+                              ? Colors.black12
+                              : Colors.amber,
                           size: 20,
                         ),
                         Icon(
                           Icons.star,
-                          color: widget.rating < 4.0 ? Colors.black12 : Colors.amber,
+                          color: widget.rating < 4.0
+                              ? Colors.black12
+                              : Colors.amber,
                           size: 20,
                         ),
                         Icon(
                           Icons.star,
-                          color: widget.rating < 5.0 ? Colors.black12 : Colors.amber,
+                          color: widget.rating < 5.0
+                              ? Colors.black12
+                              : Colors.amber,
                           size: 20,
                         ),
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 30,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Choose a color :'),
+                        SizedBox(
+                          width: screenWidth * 0.4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: List.generate(
+                              widget.warnaBulatan.length,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    for (int i = 0; i < widget.warnaBulatan.length; i++) {
+                                      if (i == index) {
+                                        widget.onTapColor = true;
+                                        _setColorBorder = widget.warnaBulatan[i];
+                                      } else {
+                                        widget.onTapColor = false;
+                                      }
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  width: 21.27,
+                                  height: 21.27,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: widget.warnaBulatan[index],
+                                    border: widget.onTapColor && _setColorBorder == widget.warnaBulatan[index] ?
+                                    Border.all(color: Colors.black, width: 2.0) : null,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Choose a color :'),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          width: 32,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: _setColorBorder,
-                              width: 2,
+                      const Text('Select Quality :'),
+                      Container(
+                        width: 102,
+                        height: 32,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.quality <= 0 ? 0 : widget.quality--;
+                                });
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Colors.black12,
+                                  ),
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.remove,
+                                  // size: 18,
+                                  color: Colors.black26,
+                                ),
+                              ),
                             ),
-                          ),
-                          child: Container(
-                            width: 24.27,
-                            height: 24.27,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.black38),
-                          ),
+                            Container(
+                              height: 30,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: const Color(0XFFE7E7E7),
+                                border: Border.all(
+                                  width: 0.5,
+                                  color: Colors.black12,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  widget.quality.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black45,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  widget.quality++;
+                                });
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  // size: 18,
+                                  color: Colors.black26,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Select Quality :'),
-                      SizedBox()
-                    ],
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const SizedBox(
+                    height: 60,
+                    width: 386,
+                    child: Text(
+                      'Curabitur commodo turpis id placerat mattis. Mauris euismod arcu id orci fringilla sodales. Proin congue eleifend ipsum, eleifend porttitor mi ullamcorper.',
+                      style: TextStyle(
+                        height: 1.3,
+                        color: Color(
+                          0xFFADADAD,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFADADAD),
+                      minimumSize: Size(MediaQuery.of(context).size.width, 40),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(40),
+                        ),
+                      ),
+                    ),
+                    child: const Text('ADD TO CARD'),
                   ),
                 ],
               ),
@@ -252,3 +408,23 @@ class _PageDetailProductState extends State<PageDetailProduct> {
     );
   }
 }
+
+// Container(
+// padding: const EdgeInsets.all(2),
+// width: 29,
+// height: 29,
+// decoration: BoxDecoration(
+// shape: BoxShape.circle,
+// border: Border.all(
+// color: _setColorBorder,
+// width: 2,
+// ),
+// ),
+// child: Container(
+// width: 21.27,
+// height: 21.27,
+// decoration: BoxDecoration(
+// shape: BoxShape.circle,
+// color: widget.warnaBulatan[index],),
+// ),
+// ),
