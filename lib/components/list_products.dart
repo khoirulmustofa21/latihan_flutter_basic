@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 
 import '../page/page_detail_product.dart';
 
 class ListProducts extends StatefulWidget {
-   const ListProducts(this.data,{Key? key}) : super(key: key);
+  const ListProducts(this.data, {Key? key}) : super(key: key);
 
-  final  List data;
+  final List data;
 
   @override
   State<ListProducts> createState() => _ListProductsState();
@@ -20,15 +19,15 @@ class _ListProductsState extends State<ListProducts> {
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
-        childAspectRatio:  sizeHeighMD ? 100/115 : 100 / 130,
+        childAspectRatio: sizeHeighMD ? 100 / 115 : 100 / 130,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         padding: const EdgeInsets.only(right: 10, left: 10),
         children: [
           ...List.generate(
             widget.data.length,
-                (index) {
-              return  Container(
+            (index) {
+              return Container(
                 width: 185,
                 height: 120,
                 decoration: const BoxDecoration(
@@ -44,18 +43,24 @@ class _ListProductsState extends State<ListProducts> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PageDetailProduct(widget.data[index]['name'],widget.data[index]['image-detail'],widget.data[index]['price'],widget.data[index]['rating'],widget.data[index]['color']),
+                              builder: (context) => PageDetailProduct(
+                                colorButton: widget.data[index]['color'],
+                                image: widget.data[index]['image-detail'],
+                                name: widget.data[index]['name'],
+                                price: widget.data[index]['price'],
+                                rating: widget.data[index]['rating'],
+                              ),
                               // builder: (context) => PageDetailProduct(widget.data[index]['name']),
                             ),
                           );
-                          print('ini adalah card');
                         },
                         child: Column(
                           children: [
                             Container(
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(widget.data[index]['image']),
+                                  image:
+                                      AssetImage(widget.data[index]['image']),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: const BorderRadius.only(
@@ -99,15 +104,14 @@ class _ListProductsState extends State<ListProducts> {
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         '\$ ${widget.data[index]['price']}',
                                         style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.black38
-                                        ),
+                                            color: Colors.black38),
                                       ),
                                       Row(
                                         children: [
@@ -121,11 +125,12 @@ class _ListProductsState extends State<ListProducts> {
                                             height: null,
                                             child: null,
                                           ),
-                                          Text('${widget.data[index]['rating']}',
+                                          Text(
+                                            '${widget.data[index]['rating']}',
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.black38
-                                            ),),
+                                                color: Colors.black38),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -149,8 +154,7 @@ class _ListProductsState extends State<ListProducts> {
                           width: 34,
                           decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: const Icon(
                             Icons.favorite_border,

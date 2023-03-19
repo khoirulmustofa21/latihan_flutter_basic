@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget{
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      // home: ColorButton(colors: const [Colors.red, Colors.blue, Colors.green, Colors.yellow],),
       home: BottomNavbarWidget(),
     );
   }

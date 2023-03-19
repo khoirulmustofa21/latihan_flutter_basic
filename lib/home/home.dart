@@ -22,11 +22,11 @@ class _HomeState extends State<Home> {
       'name': 'Stylish Chair',
       'image': 'assets/images/furniture/img_product_2.png',
       'image-detail': 'assets/images/furniture/img_product_1.png',
-      'color': [
-        'black38',
-        'amber',
-        'black12',
-        'brown',
+     'color': [
+        'cc0000',
+        '461d7c',
+        '1533ac',
+        '006600',
       ],
       'price': 170,
       'rating': 4.8
@@ -35,11 +35,11 @@ class _HomeState extends State<Home> {
       'name': 'Modern Table',
       'image': 'assets/images/furniture/img_product_3.png',
       'image-detail': 'assets/images/furniture/img_product_1.png',
-      'color': [
-        'black38',
-        'amber',
-        'black12',
-        'brown',
+     'color': [
+        'cc0000',
+        '461d7c',
+        '1533ac',
+        '006600',
       ],
       'price': 75,
       'rating': 4.9
@@ -49,10 +49,10 @@ class _HomeState extends State<Home> {
       'image': 'assets/images/furniture/img_product_4.png',
       'image-detail': 'assets/images/furniture/img_product_1.png',
       'color': [
-        'black38',
-        'amber',
-        'black12',
-        'brown',
+        'cc0000',
+        '461d7c',
+        '1533ac',
+        '006600',
       ],
       'price': 240,
       'rating': 4.7
@@ -62,10 +62,10 @@ class _HomeState extends State<Home> {
       'image': 'assets/images/furniture/img_product_5.png',
       'image-detail': 'assets/images/furniture/img_product_1.png',
       'color': [
-        'black38',
-        'amber',
-        'black12',
-        'brown',
+        'cc0000',
+        '461d7c',
+        '1533ac',
+        '006600',
       ],
       'price': 210,
       'rating': 4.9
